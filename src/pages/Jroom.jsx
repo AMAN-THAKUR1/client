@@ -8,7 +8,7 @@ function Jroom() {
     const navigate = useNavigate();
     const handleclick = async ()=>{    
         try {
-            const response =  await fetch("http://192.168.42.164:5000/join", { 
+            const response =  await fetch("https://server-pqo0.onrender.com/join", { 
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

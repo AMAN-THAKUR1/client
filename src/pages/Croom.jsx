@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom"
 import io from 'socket.io-client';
 
-
 function Croom() {
     const [code, setcode] = useState(localStorage.getItem("code") ? JSON.parse(localStorage.getItem("code")) : null)
     const [message, setmessage] = useState("")
@@ -122,13 +121,13 @@ function Croom() {
            {side && (<nav className="bg-slate-400 h-full flex flex-col items-center justify-center max-h-[90%]" >
 
                     
-                    <div className="bg-slate-600 w-full flex items-center justify-around gap-12 ">
+                    <div className="bg-[#122255] w-full flex items-center justify-around gap-12 ">
                     <button className="transition-all active:scale-110" onClick = {hamburger}><i className="fa fa-mobile fa-2x text-white" aria-hidden="true"></i></button>
-                    <h1 className="font-bold text-white ">{Number(code)}</h1>
+                    <h1 className="font-bold text-white orb ">{Number(code)}</h1>
                     </div>
                     
                 
-                <ul className=" bg-slate-400 h-full flex flex-col items-center justify-center w-full">
+                <ul className=" bg-[#0f1a3b] h-full flex flex-col items-center justify-center w-full">
                     {users.length != 1 ?
                         users.map((item, index) => (
                             <li key={index} className="border-t p-4 cursor-pointer w-full" style={{ color: item.color }} >{item.name}</li>
@@ -144,7 +143,7 @@ function Croom() {
 
             {!side && (
             <nav className=" bg-slate-400 h-full flex flex-col items-center justify-center max-h-[90%]">
-            <div className="bg-slate-600 w-full flex items-center justify-around gap-12 ">
+            <div className=" bg-[#122255] w-full flex items-center justify-around gap-12 ">
                 <button className="transition-all active:scale-110" onClick = {hamburger}><i class="fa fa-users fa-2x text-white" aria-hidden="true"></i></button>
                 <h1 className="font-bold text-white ">{Number(code)}</h1>
             </div>
@@ -155,23 +154,21 @@ function Croom() {
             ) }
 
             <div className = " w-[85%] h-screen max-h-[90%] flex flex-col justify-around items-center">
-
-            <div className = "bg-white w-[60%] max-w-[60%] h-[60%] ">
-                        {chat.map((item, index) => (
-                                <div className={`message flex ${item.name === name ? 'justify-end' : 'justify-start'} clear-both`} key={index}>
-                                    <i className="fa fa-user-circle" style={{ color: item.color }} aria-hidden="true"></i>
-                                    <div className="bg-[#041E42] text-red-50 w-min max-w-[60%] max-h-40 overflow-y-auto break-words mb-2 p-3 rounded-2xl">
-                                    {item.message}
-                                    </div>
-                                </div>
-                        ))}
-                </div>
+            <div className = "bg-[#101843] w-[60%] max-w-[60%] h-[60%] rounded-xl overflow-y-auto custom-scrollbar">
+            {chat.map((item, index) => (
+                     <div className={`message flex ${item.name === name ? 'justify-end' : 'justify-start'} clear-both p-3 gap-2`}key={index}>
+                        <i className="fa fa-user-circle text-xl" style={{ color: item.color }}aria-hidden="true"></i>
+                        <div className={`inline-block bg-[#449ef8] text-red-50 max-w-[60%] overflow-y-auto p-3 rounded-2xl text-left ${item.name === name ? 'text-right' : 'text-left'}`}style={{ wordBreak: 'break-word' }} >
+                          {item.message}
+                        </div>
+                     </div>))}
+            </div>
     
 
                     <div className="w-[33%] max-w-[40%] ">
                         <div className="flex justify-center items-center gap-4 ">
-                            <textarea type="text" name="" id="" className="rounded-lg w-[480px] h-[60px] p-2 text-lg outline-none border-none overflow-hidden resize-none" value={message} onChange={(e) => { setmessage(e.target.value) }} />
-                            <button className=" p-3 rounded-full  bg-slate-400 transition-all active:shadow-inner active:shadow-white active:scale-110" onClick={sendchat} ><i className="fa fa-paper-plane fa-2x text-slate-800" aria-hidden="true"></i></button>
+                            <input type="text" name="" id="" className="rounded-lg w-[480px] h-[60px] p-2 text-lg outline-none border-none overflow-hidden resize-none whitespace-normal" value={message} onChange={(e) => { setmessage(e.target.value) }} />
+                            <button className=" p-3 rounded-full  bg-blue-900 transition-all active:shadow-inner active:shadow-white active:scale-110" onClick={sendchat} ><i className="fa fa-paper-plane fa-2x text-[#03032fee]" aria-hidden="true"></i></button>
                         </div>
                     </div>
             </div>

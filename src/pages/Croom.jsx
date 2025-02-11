@@ -54,7 +54,7 @@ function Croom() {
 
         return () => {
             const currentName = nameRef.current;
-            const currentcode = coderef.current;
+            const currentcode = codeRef.current;
             if (currentcode && currentName) {
                 newSocket.emit("user-left", { code: currentcode, name: currentName });
             } else {

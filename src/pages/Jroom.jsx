@@ -21,7 +21,7 @@ const Jroom = () => {
       if (response.ok) {
         localStorage.setItem("code", JSON.stringify(roomCode));
         setValid(false);
-        navigate("https://client-xi-sooty.vercel.app/Croom");
+        navigate("/Croom");
       } else {
         setValid(true);
       }

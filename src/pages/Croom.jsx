@@ -23,7 +23,7 @@ function Croom() {
         if (localStorage.getItem("code")) return
         else {
             try {
-                fetch("https://server-pqo0.onrender.com/cr", { method: "GET" })
+                fetch("https://server-pqo0.onrender.com/create", { method: "GET" })
                     .then(res => res.json())
                     .then(data => {
                         localStorage.setItem("code", JSON.stringify(data));

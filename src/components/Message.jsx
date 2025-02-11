@@ -1,25 +1,18 @@
-import React from 'react'
-
-function Message({ item, index, name }) {
+const Message = ({ message, isOwn }) => {
     return (
-        <>
-            {item.name == name ?
-                (<div className={`message flex ${item.name === name ? 'justify-end' : 'justify-start'} clear-both p-3 gap-2`} key={index}>
-                    <div className={`inline-block bg-[#449ef8] text-red-50 max-w-[60%] h-fit overflow-y-auto p-3 rounded-2xl text-left ${item.name === name ? 'text-right' : 'text-left'}`} style={{ wordBreak: 'break-word' }} >
-                        {item.message}
-                    </div>
-                    <i className="fa fa-user-circle text-xl" style={{ color: item.color }} aria-hidden="true"></i>
-                </div>)
-                :
-
-                (<div className={`message flex ${item.name === name ? 'justify-end' : 'justify-start'} clear-both p-3 gap-2`} key={index}>
-                    <i className="fa fa-user-circle text-xl" style={{ color: item.color }} aria-hidden="true"></i>
-                    <div className={`inline-block bg-[#449ef8] text-red-50 max-w-[60%] h-fit overflow-y-auto p-3 rounded-2xl text-left ${item.name === name ? 'text-right' : 'text-left'}`} style={{ wordBreak: 'break-word' }} >
-                        {item.message}
-                    </div>
-                </div>)}
-        </>
-    )
-}
-
-export default Message
+      <div className={`flex ${isOwn ? 'justify-end' : 'justify-start'}`}>
+        <div className={`max-w-[70%] p-3 rounded-lg ${
+          isOwn 
+            ? 'bg-primary-500 text-white rounded-br-none' 
+            : 'bg-white text-gray-900 rounded-bl-none'
+        }`}>
+          <p className="text-sm">{message.content}</p>
+          <span className="text-xs opacity-75 mt-1 block">
+            {new Date(message.timestamp).toLocaleTimeString()}
+          </span>
+        </div>
+      </div>
+    );
+  };
+  
+  export default Message;

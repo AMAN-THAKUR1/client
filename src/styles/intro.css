@@ -1,0 +1,15 @@
+.my-btn {
+  background-color: #f5f5f5;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.my-big-font {
+  font-size:6rem;
+  font-weight: bold;
+}

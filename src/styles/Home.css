@@ -1,0 +1,15 @@
+.home-container {
+    @apply container mx-auto px-4 py-8 min-h-screen flex flex-col items-center justify-center;
+  }
+  
+  .home-title {
+    @apply text-4xl md:text-5xl font-bold text-gray-900 mb-4 animate-fade-in;
+  }
+  
+  .home-subtitle {
+    @apply text-lg text-gray-600 mb-8 animate-slide-up;
+  }
+  
+  .home-actions {
+    @apply flex flex-col sm:flex-row gap-4 animate-slide-up;
+  }

@@ -16,6 +16,7 @@ function Croom() {
     const [left, setLeft] = useState("");
     const [showMessage, setShowMessage] = useState(false);
     const nameRef = useRef(name);
+    const codeRef = useRef(code);
 
     const joinRoom = (roomId) => { socket && socket.emit('joinRoom', roomId) };
 
@@ -53,8 +54,9 @@ function Croom() {
 
         return () => {
             const currentName = nameRef.current;
-            if (code && currentName) {
-                newSocket.emit("user-left", { code, name: currentName });
+            const currentcode = coderef.current;
+            if (currentcode && currentName) {
+                newSocket.emit("user-left", { code: currentcode, name: currentName });
             } else {
                 console.error("Code or name is not available, unable to emit user-left.");
             }

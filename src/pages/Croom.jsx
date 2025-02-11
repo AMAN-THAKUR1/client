@@ -4,6 +4,7 @@ import Sidebar from "../components/Sidebar";
 import Inputs from "../components/Inputs";
 import Chatbox from "../components/Chatbox";
 import getMimeType from "../utils/getMineType";
+import '../styles/Room.css';
 
 function Croom() {
     const [code, setcode] = useState(localStorage.getItem("code") ? JSON.parse(localStorage.getItem("code")) : null);
@@ -22,7 +23,7 @@ function Croom() {
         if (localStorage.getItem("code")) return
         else {
             try {
-                fetch("https://server-pqo0.onrender.com/create", { method: "GET" })
+                fetch("https://server-pqo0.onrender.com/cr", { method: "GET" })
                     .then(res => res.json())
                     .then(data => {
                         localStorage.setItem("code", JSON.stringify(data));
@@ -74,23 +75,25 @@ function Croom() {
 
     useEffect(() => {
         setShowMessage(true);
-        const timeout = setTimeout(() =>setShowMessage(false), 4000); 
+        const timeout = setTimeout(() => setShowMessage(false), 4000); 
     
         return () => clearTimeout(timeout);
-      }, [left]);
+    }, [left]);
 
     return (
-        <div className="flex justify-start w-full " onClick={() => options ? setoptions(false) : ""}>
+        <div className="room-container animate-fade-in" onClick={() => options ? setoptions(false) : ""}>
             <Sidebar
                 code={code}
                 users={users}
             />
-            <div className="w-[85%] h-screen max-h-[90%] flex flex-col justify-around items-center">
+            <div className="glass-card w-[85%] h-screen max-h-[90%] flex flex-col justify-around items-center">
                 <Chatbox
                     name={name}
                     chat={chat}
                 />
-               {<div className = {`${(showMessage && left)?"block":"hidden" } fixed top-[50%] left-[50%] `} ><h1 className="text-red-500">{left} left the chat room</h1></div>} 
+                <div className={`${(showMessage && left) ? "block" : "hidden"} fixed top-[50%] left-[50%]`}>
+                    <h1 className="text-red-500">{left} left the chat room</h1>
+                </div>
                 <Inputs
                     socket={socket}
                     code={code}

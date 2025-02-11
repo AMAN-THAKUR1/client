@@ -1,43 +1,50 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-.custom-scrollbar {
-  scrollbar-width: thin; /* Firefox */
-  scrollbar-color: #475569 transparent; /* Slate-600 and transparent track */
+@layer base {
+  body {
+    @apply bg-gradient-to-br from-gray-50 to-gray-100 min-h-screen text-gray-900 antialiased;
+  }
 }
 
-.custom-scrollbar::-webkit-scrollbar {
-  width: 8px; /* Thin scrollbar */
-  height: 8px; /* For horizontal scrollbar */
+@layer components {
+  .glass-card {
+    @apply bg-surface-light backdrop-blur-sm border border-white/20 shadow-lg;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-2 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200;
+  }
+  
+  .btn-primary {
+    @apply px-6 py-2 rounded-lg bg-primary-600 text-white font-medium hover:bg-primary-700 active:bg-primary-800 transition-colors duration-200;
+  }
+  
+  .btn-secondary {
+    @apply px-6 py-2 rounded-lg bg-white text-gray-900 font-medium hover:bg-gray-50 active:bg-gray-100 transition-colors duration-200;
+  }
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #475569; /* Slate-600 */
-  border-radius: 4px; /* Rounded edges */
+/* Page Transitions */
+.page-enter {
+  opacity: 0;
+  transform: translateY(20px);
 }
 
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: transparent; /* Transparent track */
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
 }
 
-
-
-body{
-    background-color: #01101ff8;
+.page-exit {
+  opacity: 1;
 }
 
-/* Chrome, Safari, Edge, Opera */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
+.page-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
 }

@@ -15,7 +15,6 @@ const Message = ({ item, index, name }) => {
                         {item.message}
                     </div>
                 </div>)}
-    );
   };
   
   export default Message;

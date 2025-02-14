@@ -53,7 +53,7 @@ function Croom() {
         return () => {
             const currentName = nameRef.current;
             const currentcode = localStorage.removeItem("code");
-            console.log(`code = ${code} , name = ${currentName}`);
+            console.log(`code = ${currentcode} , name = ${currentName}`);
             if (currentcode && currentName) {
                 
                 newSocket.emit("user-left", { code: currentcode, name: currentName });

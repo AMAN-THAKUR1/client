@@ -15,6 +15,7 @@ function Croom() {
     const [left, setLeft] = useState("");
     const [showMessage, setShowMessage] = useState(false);
     const nameRef = useRef(name);
+    const codeRef = useRef(code);
 
     const joinRoom = (roomId) => { socket && socket.emit('joinRoom', roomId) };
 
@@ -52,7 +53,7 @@ function Croom() {
 
         return () => {
             const currentName = nameRef.current;
-            const currentcode = localStorage.removeItem("code");
+            const currentcode = codeRef.current;
             console.log(`code = ${currentcode} , name = ${currentName}`);
             if (currentcode && currentName) {
                 

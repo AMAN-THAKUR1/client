@@ -56,6 +56,7 @@ function Croom() {
             if (code && currentName) {
                 
                 newSocket.emit("user-left", { code, name: currentName });
+                localStorage.removeItem("code");
             } else {
                 console.error("Code or name is not available, unable to emit user-left.");
             }

@@ -87,14 +87,23 @@ function Croom() {
     }, [left]);
 
     return (
-        <div className="room-container animate-fade-in" onClick={() => options && setOptions(false)}>
-            <Sidebar code={code} users={users} />
-            <div className="glass-card w-[85%] h-screen max-h-[90%] flex flex-col justify-around items-center">
-                <Chatbox name={name} chat={chat} />
-                <div className={`${(showMessage && left) ? "block" : "hidden"} fixed top-[50%] left-[50%]`}>
-                    <h1 className="text-red-500">{left} left the chat room</h1>
-                </div>
-                <Inputs socket={socket} code={code} options={options} setoptions={setOptions} />
+        <div className="flex justify-start w-full " onClick={() => options ? setoptions(false) : ""}>
+            <Sidebar
+                code={code}
+                users={users}
+            />
+            <div className="w-[85%] h-screen max-h-[90%] flex flex-col justify-around items-center">
+                <Chatbox
+                    name={name}
+                    chat={chat}
+                />
+               {<div className = {`${(showMessage && left)?"block":"hidden" } fixed top-[50%] left-[50%] `} ><h1 className="text-red-500">{left} left the chat room</h1></div>} 
+                <Inputs
+                    socket={socket}
+                    code={code}
+                    options={options}
+                    setoptions={setoptions}
+                />
             </div>
         </div>
     );

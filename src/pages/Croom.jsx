@@ -52,7 +52,9 @@ function Croom() {
 
         return () => {
             const currentName = nameRef.current;
+            console.log(`code = ${code} , name = ${currentName}`);
             if (code && currentName) {
+                
                 newSocket.emit("user-left", { code, name: currentName });
             } else {
                 console.error("Code or name is not available, unable to emit user-left.");

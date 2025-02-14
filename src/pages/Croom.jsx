@@ -52,10 +52,11 @@ function Croom() {
 
         return () => {
             const currentName = nameRef.current;
+            const currentcode = localStorage.removeItem("code");
             console.log(`code = ${code} , name = ${currentName}`);
-            if (code && currentName) {
+            if (currentcode && currentName) {
                 
-                newSocket.emit("user-left", { code, name: currentName });
+                newSocket.emit("user-left", { code: currentcode, name: currentName });
                 localStorage.removeItem("code");
             } else {
                 console.error("Code or name is not available, unable to emit user-left.");

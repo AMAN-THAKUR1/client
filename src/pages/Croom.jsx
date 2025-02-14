@@ -60,14 +60,11 @@ function Croom() {
         });
 
         return () => {
-            const currentName = nameRef.current;
-            if (code && currentName) {
-                newSocket.emit("user-left", { code, name: currentName });
-            } else {
-                console.error("Code or name is not available, unable to emit user-left.");
-            }
-            newSocket.disconnect();
-        };
+    if (newSocket && code && nameRef.current) {
+        newSocket.emit("user-left", { code, name: nameRef.current });
+    }
+    newSocket.disconnect();
+};
     }, []);
 
     useEffect(() => {

@@ -1,6 +1,9 @@
-const Message = ({ item, index, name }) => {
+import React from 'react'
+
+function Message({ item, index, name }) {
     return (
-          {item.name == name ?
+        <>
+            {item.name == name ?
                 (<div className={`message flex ${item.name === name ? 'justify-end' : 'justify-start'} clear-both p-3 gap-2`} key={index}>
                     <div className={`inline-block bg-[#449ef8] text-red-50 max-w-[60%] h-fit overflow-y-auto p-3 rounded-2xl text-left ${item.name === name ? 'text-right' : 'text-left'}`} style={{ wordBreak: 'break-word' }} >
                         {item.message}
@@ -15,6 +18,8 @@ const Message = ({ item, index, name }) => {
                         {item.message}
                     </div>
                 </div>)}
-  };
-  
-  export default Message;
+        </>
+    )
+}
+
+export default Message

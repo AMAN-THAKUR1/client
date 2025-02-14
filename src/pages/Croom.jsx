@@ -4,59 +4,50 @@ import Sidebar from "../components/Sidebar";
 import Inputs from "../components/Inputs";
 import Chatbox from "../components/Chatbox";
 import getMimeType from "../utils/getMineType";
-import '../styles/Room.css';
 
 function Croom() {
-    const [code, setCode] = useState(localStorage.getItem("code") ? JSON.parse(localStorage.getItem("code")) : null);
+    const [code, setcode] = useState(localStorage.getItem("code") ? JSON.parse(localStorage.getItem("code")) : null);
     const [socket, setSocket] = useState(null);
-    const [chat, setChat] = useState([]);
-    const [name, setName] = useState("");
-    const [users, setUsers] = useState([]);
+    const [chat, setchat] = useState([]);
+    const [name, setname] = useState("");
+    const [users, setusers] = useState([]);
     const [options, setoptions] = useState(false);
     const [left, setLeft] = useState("");
     const [showMessage, setShowMessage] = useState(false);
     const nameRef = useRef(name);
 
-    const joinRoom = (roomId) => {
-        if (socket) {
-            socket.emit('joinRoom', roomId);
-        }
-    };
+    const joinRoom = (roomId) => { socket && socket.emit('joinRoom', roomId) };
 
     useEffect(() => {
-        if (localStorage.getItem("code")) return;
-
-        try {
-            fetch("https://server-pqo0.onrender.com/create", { method: "GET" })
-                .then(res => res.json())
-                .then(data => {
-                    localStorage.setItem("code", JSON.stringify(data));
-                    setCode(data);
-                })
-                .catch(error => console.error("Error fetching room code:", error));
-        } catch (error) {
-            console.error("Error:", error);
+        if (localStorage.getItem("code")) return
+        else {
+            try {
+                fetch("https://server-pqo0.onrender.com/create", { method: "GET" })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem("code", JSON.stringify(data));
+                        setcode(data);
+                    })
+            } catch (error) {
+                console.log(error);
+            }
         }
     }, []);
 
     useEffect(() => {
         const newSocket = io("https://server-pqo0.onrender.com");
         setSocket(newSocket);
-
-        newSocket.on("connect", () => console.log("Connected to socket"));
-
-        newSocket.on("message", (data) => setChat((prevChat) => [data, ...prevChat]));
-
+        newSocket.on("connect", () => { });
+        newSocket.on("message", (data) => setchat((prevChat) => [data, ...prevChat]));
         newSocket.on("update-users", ({ newusers, leftname }) => {
-            setUsers(newusers);
+            setusers(newusers);
             setLeft(leftname);
         });
-
         newSocket.on('fileBroadcast', (data) => {
             const { fileName, fileBuffer, name } = data;
             const blob = new Blob([fileBuffer], { type: getMimeType(fileName) });
             const downloadUrl = URL.createObjectURL(blob);
-            setChat((prevChat) => [{ fileName, downloadUrl, name }, ...prevChat]);
+            setchat((prevChat) => [{ fileName, downloadUrl, name }, ...prevChat]);
         });
 
         return () => {
@@ -68,27 +59,25 @@ function Croom() {
             }
             newSocket.disconnect();
         };
-        
-    }, []);
+    }, []); 
 
     useEffect(() => {
         if (code && socket) joinRoom(Number(code));
         if (socket) {
             socket.on("assignedAttributes", (data) => {
-                setName(data.name);
+                setname(data.name);
                 nameRef.current = data.name;
             });
-
-            socket.on("roomusers", (data) => setUsers(data));
+            socket.on("roomusers", (data) => setusers((prevUsers) => data));
         }
     }, [code, socket]);
 
     useEffect(() => {
         setShowMessage(true);
-        const timeout = setTimeout(() => setShowMessage(false), 4000);
-
+        const timeout = setTimeout(() =>setShowMessage(false), 4000); 
+    
         return () => clearTimeout(timeout);
-    }, [left]);
+      }, [left]);
 
     return (
         <div className="flex justify-start w-full " onClick={() => options ? setoptions(false) : ""}>

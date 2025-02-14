@@ -15,7 +15,7 @@ function Sidebar({ code, users }) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ code: code }),
-    }).then(() => localStorage.removeItem("code"));
+    }).then(() => );
 
     navigate("/home");
   };

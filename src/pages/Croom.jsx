@@ -12,7 +12,7 @@ function Croom() {
     const [chat, setChat] = useState([]);
     const [name, setName] = useState("");
     const [users, setUsers] = useState([]);
-    const [options, setOptions] = useState(false);
+    const [options, setoptions] = useState(false);
     const [left, setLeft] = useState("");
     const [showMessage, setShowMessage] = useState(false);
     const nameRef = useRef(name);
